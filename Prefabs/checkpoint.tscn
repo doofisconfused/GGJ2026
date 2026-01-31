@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqmnxnhmf852u"]
+
+[ext_resource type="Script" uid="uid://b7081g2vm3jop" path="res://Scripts/checkpoint.gd" id="1_q88ch"]
+[ext_resource type="Texture2D" uid="uid://3f7ldxh8vr67" path="res://Sprites/Interactible/Lantern float.PNG" id="2_q7jp7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scjsw"]
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_q88ch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.8, 4.64)
+shape = SubResource("CapsuleShape2D_scjsw")
+debug_color = Color(0.655362, 0.517098, 0, 0.42)
+
+[node name="LanternSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_q7jp7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

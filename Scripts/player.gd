@@ -23,9 +23,11 @@ var max_jump_count: int = 1
 var can_climb: bool = false
 # whether you're in a ladder
 var lantern_bounces: int = 0
-# number of times you've bounced on a lantern s
+# number of times you've bounced on a lantern since leaving the ground
+var spawnpoint: Vector2 = Vector2(934.0, 553.0)
 
 func _ready() -> void:
+	print(spawnpoint)
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -83,9 +85,6 @@ func mask_change(new_mask: int) -> void:
 		set_collision_mask_value(3, (mask=="monkey"))
 		print(get_collision_mask_value(3))
 		
-
-
-
 func _on_bounce_area_body_entered(_body: Node2D) -> void:
 	if mask_index == 2:
 		jump(BOUNCE_VELOCITY * (1.0 + (lantern_bounces * 1.5) / 10.0))
@@ -93,3 +92,12 @@ func _on_bounce_area_body_entered(_body: Node2D) -> void:
 		if not lantern_bounces >= 3:
 			lantern_bounces += 1
 		# this math is arbitrary and might be good to discuss tomorrow
+
+func _on_checkpoint_set(new_spawnpoint: Vector2) -> void:
+	spawnpoint = new_spawnpoint 
+	print(spawnpoint)
+
+
+
+func _on_death() -> void:
+	global_position = spawnpoint # Replace with function body.

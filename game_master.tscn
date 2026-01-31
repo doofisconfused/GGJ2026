@@ -1,17 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhvejpx6ilyaf"]
+[gd_scene load_steps=9 format=3 uid="uid://dhvejpx6ilyaf"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="2_yy1gc"]
-[ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="3_3ef5b"]
 [ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="3_ehuk0"]
 [ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_ehuk0"]
 [ext_resource type="Shader" uid="uid://2mrxyo1vfafb" path="res://Shaders/blur.gdshader" id="5_pb2si"]
 [ext_resource type="Texture2D" uid="uid://dioiuulxw6wdw" path="res://icon.svg" id="6_d8xmc"]
+[ext_resource type="PackedScene" uid="uid://hfwvyo808we6" path="res://Prefabs/ladder.tscn" id="5_yypio"]
+[ext_resource type="Script" uid="uid://cd36ehwg7kcnv" path="res://death_box.gd" id="6_d8xmc"]
+[ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="6_pb2si"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ef5b"]
 size = Vector2(2123, 263)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehuk0"]
-size = Vector2(210, 171)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emkk8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_emkk8"]
 shader = ExtResource("5_pb2si")
@@ -37,13 +38,6 @@ position = Vector2(938, 749)
 scale = Vector2(-0.608798, 1)
 shape = SubResource("RectangleShape2D_3ef5b")
 
-[node name="ClimbableArea" parent="." instance=ExtResource("3_3ef5b")]
-position = Vector2(373, 389)
-
-[node name="ClimbingCollider" type="CollisionShape2D" parent="ClimbableArea"]
-position = Vector2(28, 116)
-shape = SubResource("RectangleShape2D_ehuk0")
-
 [node name="BounceArea" parent="." instance=ExtResource("3_ehuk0")]
 position = Vector2(858, 346)
 
@@ -55,6 +49,26 @@ material = SubResource("ShaderMaterial_emkk8")
 position = Vector2(480, 142)
 scale = Vector2(1.98438, 1.94531)
 texture = ExtResource("6_d8xmc")
+[node name="Ladder" parent="." instance=ExtResource("5_yypio")]
+position = Vector2(814, 336)
+
+[node name="Checkpoint" parent="." instance=ExtResource("6_pb2si")]
+position = Vector2(1014, 307)
+
+[node name="DeathBox" type="Area2D" parent="."]
+collision_layer = 10
+collision_mask = 10
+script = ExtResource("6_d8xmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBox"]
+position = Vector2(930, 1017)
+scale = Vector2(99.88, 7.88)
+shape = SubResource("RectangleShape2D_emkk8")
+debug_color = Color(1, 0.009919, 0.0323908, 0.42)
 
 [connection signal="area_entered" from="BounceArea" to="Player" method="_on_lantern_area_entered"]
 [connection signal="body_entered" from="BounceArea" to="Player" method="_on_bounce_area_body_entered"]
+[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
+[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_checkpoint_set"]
+[connection signal="area_entered" from="DeathBox" to="DeathBox" method="_on_area_entered"]
+[connection signal="death" from="DeathBox" to="Player" method="_on_death"]
