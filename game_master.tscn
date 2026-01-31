@@ -37,6 +37,6 @@ shape = SubResource("RectangleShape2D_3ef5b")
 [node name="ClimbableArea" parent="." instance=ExtResource("3_3ef5b")]
 position = Vector2(373, 389)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbableArea"]
+[node name="ClimbingCollider" type="CollisionShape2D" parent="ClimbableArea"]
 position = Vector2(28, 116)
 shape = SubResource("RectangleShape2D_ehuk0")

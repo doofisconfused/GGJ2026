@@ -9,6 +9,7 @@ class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+const CLIMB_VELOCITY = -200.0
 const MASK_LIST = ["none", "rabbit", "monkey", "rat"]
 
 var mask_index: int = 0
@@ -27,11 +28,14 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and jump_count < max_jump_count:
-		jump()
-		jump_count += 1
-
+	if Input.is_action_just_pressed("jump"):
+		if jump_count < max_jump_count:
+			jump()
+			jump_count += 1
 	
+	# Climbing ladders
+	if Input.is_action_pressed("jump") and can_climb:
+		velocity.y = CLIMB_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

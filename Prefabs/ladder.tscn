@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://hfwvyo808we6"]
+
+[ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="1_2guuy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2guuy"]
+size = Vector2(20, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmtat"]
+size = Vector2(20, 1.0625)
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(2, 2)
+
+[node name="ClimbableArea" parent="." instance=ExtResource("1_2guuy")]
+
+[node name="ClimbCollider" type="CollisionShape2D" parent="ClimbableArea"]
+shape = SubResource("RectangleShape2D_2guuy")
+
+[node name="Top" type="StaticBody2D" parent="."]
+position = Vector2(0, -53)
+
+[node name="TopCollider" type="CollisionShape2D" parent="Top"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_rmtat")
+one_way_collision = true
