@@ -9,13 +9,20 @@ class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+const BOUNCE_VELOCITY = -600.0
 const CLIMB_VELOCITY = -200.0
 const MASK_LIST = ["none", "rabbit", "monkey", "rat"]
 
 var mask_index: int = 0
-var jump_count: int = 0
+# index in the MASK_LIST array representing current mask
+var jump_count: float = 0.0
+# number of jumps you have left before touching the ground
 var max_jump_count: int = 1
+# number of jumps you can make at once
 var can_climb: bool = false
+# whether you're in a ladder
+var lantern_bounces: int = 0
+# number of times you've bounced on a lantern s
 
 func _ready() -> void:
 	pass
@@ -26,6 +33,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		jump_count = 0
+		lantern_bounces = 0
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
@@ -53,8 +61,8 @@ func _physics_process(delta: float) -> void:
 		print(MASK_LIST[mask_index])
 	move_and_slide()
 	
-func jump() -> void:
-		velocity.y = JUMP_VELOCITY
+func jump(power = JUMP_VELOCITY) -> void:
+		velocity.y = power
 
 func mask_change(new_mask: int) -> void:
 	if left_above_cast.is_colliding() or right_above_cast.is_colliding():
@@ -70,3 +78,13 @@ func mask_change(new_mask: int) -> void:
 		normal_collider.disabled = true if mask == "rat" else false
 		rat_collider.disabled = not normal_collider.disabled
 		
+
+
+
+func _on_bounce_area_body_entered(_body: Node2D) -> void:
+	if mask_index == 2:
+		jump(BOUNCE_VELOCITY * (1.0 + (lantern_bounces * 1.5) / 10.0))
+		print(lantern_bounces)
+		if not lantern_bounces >= 3:
+			lantern_bounces += 1
+		# this math is arbitrary and might be good to discuss tomorrow

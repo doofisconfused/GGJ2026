@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyx06f1cmdryt"]
+
+[ext_resource type="Script" uid="uid://bfdqnsnfejwi7" path="res://Scripts/bounce_area.gd" id="1_i2rm8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3y5y"]
+
+[node name="BounceArea" type="Area2D"]
+script = ExtResource("1_i2rm8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(6, 6)
+shape = SubResource("CircleShape2D_j3y5y")
+debug_color = Color(0.852921, 0.37007, 3.85046e-07, 0.42)
