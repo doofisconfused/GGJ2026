@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://i2eb6xaow85r"]
+
+[ext_resource type="Texture2D" uid="uid://dyhhhl2pb3g1" path="res://Sprites/Enemy/Adult NPC.PNG" id="1_leowk"]
+
+[node name="Enemy" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_leowk")
