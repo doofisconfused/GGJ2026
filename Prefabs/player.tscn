@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8yb0h5jf1tio"]
+
+[ext_resource type="Script" uid="uid://da52bnrt3fh4x" path="res://Scripts/player.gd" id="1_y6xdh"]
+[ext_resource type="Texture2D" uid="uid://dioiuulxw6wdw" path="res://icon.svg" id="2_5wxv7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5wxv7"]
+radius = 63.0
+height = 126.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5hcb"]
+radius = 63.0
+height = 126.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y6xdh")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_5wxv7")
+
+[node name="NormalCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5wxv7")
+
+[node name="RatCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 31)
+scale = Vector2(0.780001, 0.5)
+shape = SubResource("CapsuleShape2D_5wxv7")
+disabled = true
+debug_color = Color(0.947358, 3.56168e-06, 0.583463, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LeftCast" type="RayCast2D" parent="."]
+position = Vector2(-59, 0)
+target_position = Vector2(0, -75)
+
+[node name="RightCast" type="RayCast2D" parent="."]
+position = Vector2(59, 1)
+target_position = Vector2(0, -75)
+
+[node name="Climb" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Climb"]
+shape = SubResource("CapsuleShape2D_y5hcb")

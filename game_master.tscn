@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhvejpx6ilyaf"]
+
+[ext_resource type="Texture2D" uid="uid://dioiuulxw6wdw" path="res://icon.svg" id="1_5yk56"]
+[ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="2_yy1gc"]
+[ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="3_3ef5b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ef5b"]
+size = Vector2(2123, 263)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehuk0"]
+size = Vector2(210, 171)
+
+[node name="GameMaster" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(453, 198)
+texture = ExtResource("1_5yk56")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(938, 749)
+scale = Vector2(-0.608798, 1)
+shape = SubResource("RectangleShape2D_3ef5b")
+
+[node name="Player" parent="." instance=ExtResource("2_yy1gc")]
+position = Vector2(934, 553)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(836, -337)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(938, 749)
+scale = Vector2(-0.608798, 1)
+shape = SubResource("RectangleShape2D_3ef5b")
+
+[node name="ClimbableArea" parent="." instance=ExtResource("3_3ef5b")]
+position = Vector2(373, 389)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbableArea"]
+position = Vector2(28, 116)
+shape = SubResource("RectangleShape2D_ehuk0")
