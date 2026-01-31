@@ -42,7 +42,6 @@ var current_animator: AnimatedSprite2D
 func _ready() -> void:
 	spawnpoint = global_position
 	current_animator = ester_animator
-	pass
 
 func _physics_process(delta: float) -> void:
 	current_animator.flip_h = flipped

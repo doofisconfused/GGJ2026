@@ -1,20 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhvejpx6ilyaf"]
+[gd_scene load_steps=12 format=3 uid="uid://dhvejpx6ilyaf"]
 
+[ext_resource type="PackedScene" uid="uid://i2eb6xaow85r" path="res://Prefabs/enemy.tscn" id="1_emkk8"]
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="2_yy1gc"]
 [ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="3_ehuk0"]
 [ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_ehuk0"]
 [ext_resource type="Shader" uid="uid://2mrxyo1vfafb" path="res://Shaders/blur.gdshader" id="5_pb2si"]
 [ext_resource type="PackedScene" uid="uid://hfwvyo808we6" path="res://Prefabs/ladder.tscn" id="5_yypio"]
-
 [ext_resource type="Script" uid="uid://cd36ehwg7kcnv" path="res://Scripts/death_box.gd" id="6_d8xmc"]
 [ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="6_pb2si"]
-[ext_resource type="Script" uid="uid://cd36ehwg7kcnv" path="res://Scripts/death_box.gd" id="7_d8xmc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ef5b"]
-
-size = Vector2(4921.56, 263)
-
-size = Vector2(2123, 263)
+size = Vector2(4021.43, 263)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_emkk8"]
 shader = ExtResource("5_pb2si")
@@ -23,16 +19,18 @@ shader_parameter/blur_ammount = 0.31
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emkk8"]
 size = Vector2(134.832, 20)
 
-
 [node name="GameMaster" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(938, 749)
+position = Vector2(1515.88, 748.999)
 rotation = 3.14159
 scale = Vector2(0.608798, -1)
 shape = SubResource("RectangleShape2D_3ef5b")
+
+[node name="Enemy" parent="StaticBody2D" instance=ExtResource("1_emkk8")]
+position = Vector2(2139, 548)
 
 [node name="Player" parent="." instance=ExtResource("2_yy1gc")]
 position = Vector2(934, 519)
@@ -84,7 +82,7 @@ debug_color = Color(1, 0.009919, 0.0323908, 0.42)
 
 [connection signal="area_entered" from="BounceArea" to="Player" method="_on_lantern_area_entered"]
 [connection signal="body_entered" from="BounceArea" to="Player" method="_on_bounce_area_body_entered"]
-[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_checkpoint_set"]
 [connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
+[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_checkpoint_set"]
 [connection signal="area_entered" from="DeathBox" to="DeathBox" method="_on_area_entered"]
 [connection signal="death" from="DeathBox" to="Player" method="_on_death"]
