@@ -4,17 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://cw4tpkiiieqaw" path="res://Sprites/Interactible/Hanging lantern.png" id="2_bknfb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3y5y"]
+radius = 11.0028
 
 [node name="BounceArea" type="Area2D"]
 script = ExtResource("1_i2rm8")
+
+[node name="LanternSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.666668, 2)
+scale = Vector2(1.36491, 1.37349)
+texture = ExtResource("2_bknfb")
+offset = Vector2(0, -7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_j3y5y")
 debug_color = Color(0.852921, 0.37007, 3.85046e-07, 0.42)
-
-[node name="LanternSprite" type="Sprite2D" parent="CollisionShape2D"]
-position = Vector2(-0.166667, 0.5)
-scale = Vector2(0.341228, 0.343373)
-texture = ExtResource("2_bknfb")
-offset = Vector2(0, -7)
