@@ -55,3 +55,6 @@ mask_last={
 
 2d_render/layer_1="Terrain"
 2d_render/layer_2="Climbables"
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Climbables"
+2d_physics/layer_3="Monkey"

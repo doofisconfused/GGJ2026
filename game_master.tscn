@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhvejpx6ilyaf"]
+[gd_scene load_steps=7 format=3 uid="uid://dhvejpx6ilyaf"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="2_yy1gc"]
 [ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="3_3ef5b"]
-[ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/bounce_area.tscn" id="3_ehuk0"]
+[ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="3_ehuk0"]
+[ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_ehuk0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ef5b"]
 size = Vector2(2123, 263)
@@ -39,6 +40,9 @@ shape = SubResource("RectangleShape2D_ehuk0")
 
 [node name="BounceArea" parent="." instance=ExtResource("3_ehuk0")]
 position = Vector2(723, 517)
+
+[node name="String" parent="." instance=ExtResource("4_ehuk0")]
+position = Vector2(539, 433)
 
 [connection signal="area_entered" from="BounceArea" to="Player" method="_on_lantern_area_entered"]
 [connection signal="body_entered" from="BounceArea" to="Player" method="_on_bounce_area_body_entered"]

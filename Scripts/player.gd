@@ -13,6 +13,7 @@ const BOUNCE_VELOCITY = -600.0
 const CLIMB_VELOCITY = -200.0
 const MASK_LIST = ["none", "rabbit", "monkey", "rat"]
 
+
 var mask_index: int = 0
 # index in the MASK_LIST array representing current mask
 var jump_count: float = 0.0
@@ -77,6 +78,10 @@ func mask_change(new_mask: int) -> void:
 		# rat:
 		normal_collider.disabled = true if mask == "rat" else false
 		rat_collider.disabled = not normal_collider.disabled
+		
+		# monkey:
+		set_collision_mask_value(3, (mask=="monkey"))
+		print(get_collision_mask_value(3))
 		
 
 
