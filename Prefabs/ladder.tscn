@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://hfwvyo808we6"]
+[gd_scene load_steps=5 format=3 uid="uid://hfwvyo808we6"]
 
 [ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="1_2guuy"]
+[ext_resource type="Texture2D" uid="uid://cq2butychh6px" path="res://Sprites/Interactible/Ladder.PNG" id="2_rmtat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2guuy"]
 size = Vector2(20, 125)
@@ -12,14 +13,20 @@ size = Vector2(20, 1.0625)
 scale = Vector2(2, 2)
 
 [node name="ClimbableArea" parent="." instance=ExtResource("1_2guuy")]
+scale = Vector2(2.7, 2.28)
 
 [node name="ClimbCollider" type="CollisionShape2D" parent="ClimbableArea"]
 shape = SubResource("RectangleShape2D_2guuy")
 
 [node name="Top" type="StaticBody2D" parent="."]
-position = Vector2(0, -53)
+position = Vector2(0, -127)
+scale = Vector2(2.7, 2.28)
 
 [node name="TopCollider" type="CollisionShape2D" parent="Top"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_rmtat")
 one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rmtat")
+offset = Vector2(-3.235, 0)

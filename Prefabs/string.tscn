@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://kaiom78vsbm2"]
+[gd_scene load_steps=4 format=3 uid="uid://kaiom78vsbm2"]
+
+[ext_resource type="Texture2D" uid="uid://dony3f5guwep" path="res://Sprites/Interactible/Hanging string.png" id="1_wp18o"]
+[ext_resource type="Texture2D" uid="uid://cw4tpkiiieqaw" path="res://Sprites/Interactible/Hanging lantern.png" id="2_bv7m8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_keqen"]
 size = Vector2(354, 20)
@@ -10,7 +13,30 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 3.14159
+scale = Vector2(1.04, 0.439997)
 shape = SubResource("RectangleShape2D_keqen")
 one_way_collision = true
 one_way_collision_margin = 2.0
 debug_color = Color(0.83582, 0.387796, 0, 0.42)
+
+[node name="StringSprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_wp18o")
+
+[node name="LanternSprite1" type="Sprite2D" parent="StringSprite"]
+position = Vector2(34.6667, -10.6666)
+rotation = 3.14159
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_bv7m8")
+
+[node name="LanternSprite2" type="Sprite2D" parent="StringSprite"]
+position = Vector2(0, -10.667)
+rotation = 3.14159
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_bv7m8")
+
+[node name="LanternSprite3" type="Sprite2D" parent="StringSprite"]
+position = Vector2(-34.667, -10.667)
+rotation = 3.14159
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_bv7m8")

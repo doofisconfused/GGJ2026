@@ -38,8 +38,8 @@ position = Vector2(59, 1)
 target_position = Vector2(0, -75)
 
 [node name="PlayerField" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerField"]
 shape = SubResource("CapsuleShape2D_y5hcb")
