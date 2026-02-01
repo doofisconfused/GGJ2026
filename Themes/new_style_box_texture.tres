@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bn5d4615a2w8v"]
+
+[ext_resource type="Texture2D" uid="uid://duepsu0ooyk6n" path="res://Sprites/All/Button.PNG" id="1_k84ri"]
+
+[resource]
+texture = ExtResource("1_k84ri")
+texture_margin_left = 100.0
+texture_margin_top = 100.0
+texture_margin_right = 100.0
+texture_margin_bottom = 100.0
+region_rect = Rect2(0, 0, 802, 800)

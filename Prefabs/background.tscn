@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4sr2l7efwbqb"]
+
+[ext_resource type="Texture2D" uid="uid://cyv4ia860yr74" path="res://Sprites/All/Night sky.png" id="1_h03d7"]
+[ext_resource type="Texture2D" uid="uid://cessowrqeawsa" path="res://Sprites/All/S cloud.png" id="2_l8qts"]
+[ext_resource type="Texture2D" uid="uid://bc33f6kj0t35g" path="res://Sprites/All/L cloud.png" id="3_xx18q"]
+[ext_resource type="Texture2D" uid="uid://dw3sfceb08d6" path="res://Sprites/All/M cloud.png" id="4_ebvun"]
+[ext_resource type="Texture2D" uid="uid://c20vuhkfqildh" path="res://Sprites/All/UpperSky.png" id="5_0lv3d"]
+[ext_resource type="Texture2D" uid="uid://d4fe7hgxola2h" path="res://Sprites/All/Moon.png" id="6_nws2j"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -4
+scroll_offset = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+repeat_times = 2
+
+[node name="NightSky" type="Sprite2D" parent="Parallax2D"]
+z_index = -5
+position = Vector2(960, 540)
+texture = ExtResource("1_h03d7")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+z_index = -4
+scroll_offset = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(20, 0)
+repeat_times = 2
+
+[node name="SCloud" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(3673.9, -3.1)
+texture = ExtResource("2_l8qts")
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+z_index = -4
+scroll_offset = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(10, 0)
+repeat_times = 2
+
+[node name="LCloud" type="Sprite2D" parent="Parallax2D4"]
+position = Vector2(3016.9, -335.1)
+texture = ExtResource("3_xx18q")
+
+[node name="Parallax2D5" type="Parallax2D" parent="."]
+z_index = -4
+scroll_offset = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(30, 0)
+repeat_times = 2
+
+[node name="MCloud" type="Sprite2D" parent="Parallax2D5"]
+position = Vector2(2052.9, -508.1)
+texture = ExtResource("4_ebvun")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+z_index = -4
+scroll_offset = Vector2(-1919.9, -1079.9)
+repeat_size = Vector2(1920, 0)
+repeat_times = 2
+
+[node name="NightSky" type="Sprite2D" parent="Parallax2D2"]
+z_index = -5
+position = Vector2(960, 540)
+texture = ExtResource("5_0lv3d")
+
+[node name="Moon" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(3651.9, 345.9)
+texture = ExtResource("6_nws2j")

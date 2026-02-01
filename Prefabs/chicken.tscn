@@ -1,0 +1,161 @@
+[gd_scene load_steps=14 format=3 uid="uid://bpelocyiqfvr4"]
+
+[ext_resource type="Script" uid="uid://de0ccijdj1dld" path="res://Scripts/chicken.gd" id="1_nbxjk"]
+[ext_resource type="Texture2D" uid="uid://bc88mnpfqa5pu" path="res://Sprites/All/Chicken chill.png" id="2_yqjqx"]
+[ext_resource type="Texture2D" uid="uid://pn2fr25nu8ch" path="res://Sprites/All/Chicken panic.png" id="3_yqjqx"]
+[ext_resource type="FontFile" uid="uid://bkyd3vkt30fdv" path="res://Fonts/antiquity-print.ttf" id="4_dd5eu"]
+[ext_resource type="Texture2D" uid="uid://3gaapfu83t6x" path="res://Sprites/All/feather.png" id="5_qxekt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd5eu"]
+size = Vector2(242, 91)
+
+[sub_resource type="Animation" id="Animation_dd5eu"]
+resource_name = "panic"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChickenChill:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_yqjqx"), ExtResource("3_yqjqx"), ExtResource("2_yqjqx"), ExtResource("3_yqjqx"), ExtResource("2_yqjqx"), ExtResource("3_yqjqx"), ExtResource("2_yqjqx"), ExtResource("3_yqjqx"), ExtResource("2_yqjqx"), ExtResource("3_yqjqx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChickenChill:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(110, 0), Vector2(-110, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ChickenChill:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qxekt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChickenChill:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_yqjqx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChickenChill:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(110, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ChickenChill:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w80gq"]
+_data = {
+&"RESET": SubResource("Animation_qxekt"),
+&"panic": SubResource("Animation_dd5eu")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_qxekt"]
+font = ExtResource("4_dd5eu")
+font_size = 24
+
+[sub_resource type="Curve" id="Curve_w80gq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.676471, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.76145, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mfhp3"]
+curve = SubResource("Curve_w80gq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5kplt"]
+particle_flag_disable_z = true
+angle_min = -82.8
+angle_max = 173.8
+spread = 180.0
+initial_velocity_min = 40.23
+initial_velocity_max = 91.95
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mfhp3")
+
+[node name="Chicken" type="Node2D"]
+script = ExtResource("1_nbxjk")
+
+[node name="ChickenChill" type="Sprite2D" parent="."]
+position = Vector2(110, 0)
+texture = ExtResource("2_yqjqx")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(7, -2.5)
+shape = SubResource("RectangleShape2D_dd5eu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w80gq")
+}
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -88.0
+offset_right = 20.0
+offset_bottom = -52.0
+text = "F"
+label_settings = SubResource("LabelSettings_qxekt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("5_qxekt")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5kplt")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

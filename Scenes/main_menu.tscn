@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://6fn3hyxlpxmm"]
+
+[ext_resource type="FontFile" uid="uid://bkyd3vkt30fdv" path="res://Fonts/antiquity-print.ttf" id="1_n45e2"]
+[ext_resource type="StyleBox" uid="uid://bn5d4615a2w8v" path="res://Themes/new_style_box_texture.tres" id="2_opfnp"]
+[ext_resource type="Texture2D" uid="uid://duepsu0ooyk6n" path="res://Sprites/All/Button.PNG" id="3_cp0ys"]
+[ext_resource type="Script" uid="uid://b7c5eirras2ft" path="res://Scripts/main_menu.gd" id="4_yhxw7"]
+[ext_resource type="Texture2D" uid="uid://bs44yxqcfdc6r" path="res://Sprites/All/Main menu.PNG" id="5_trj04"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16hvj"]
+texture = ExtResource("3_cp0ys")
+texture_margin_left = 100.0
+texture_margin_top = 100.0
+texture_margin_right = 100.0
+texture_margin_bottom = 100.0
+region_rect = Rect2(0, 0, 802, 800)
+
+[sub_resource type="Theme" id="Theme_vr1f0"]
+Button/colors/font_color = Color(0.427451, 0.407843, 0.788235, 1)
+Button/colors/font_focus_color = Color(0.439216, 0.423529, 0.792157, 1)
+Button/colors/font_hover_color = Color(0.270588, 0.254902, 0.776471, 1)
+Button/colors/font_hover_pressed_color = Color(0.180392, 0.168627, 0.737255, 1)
+Button/colors/font_pressed_color = Color(0.180392, 0.168627, 0.737255, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_n45e2")
+Button/styles/focus = ExtResource("2_opfnp")
+Button/styles/hover = SubResource("StyleBoxTexture_16hvj")
+Button/styles/normal = ExtResource("2_opfnp")
+Button/styles/pressed = ExtResource("2_opfnp")
+Label/colors/font_color = Color(0.427451, 0.407843, 0.788235, 1)
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_n45e2")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vr1f0")
+script = ExtResource("4_yhxw7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_trj04")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1205.0
+offset_top = 436.0
+offset_right = 1667.0
+offset_bottom = 659.0
+text = "PLAY"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1201.0
+offset_top = 695.0
+offset_right = 1663.0
+offset_bottom = 918.0
+text = "EXIT"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -964.0
+offset_bottom = 382.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.192157, 0.184314, 0.666667, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 76
+text = "New Year’s Feast"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

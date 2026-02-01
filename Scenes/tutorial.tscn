@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://goutf0u6o5d5"]
+[gd_scene load_steps=25 format=3 uid="uid://goutf0u6o5d5"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="1_feyax"]
+[ext_resource type="PackedScene" path="res://Prefabs/enemy.tscn" id="1_pkgwa"]
 [ext_resource type="PackedScene" uid="uid://dxdrxmqespfnr" path="res://Prefabs/ground.tscn" id="2_omtrn"]
 [ext_resource type="PackedScene" uid="uid://dieg7s4xydh82" path="res://Prefabs/house.tscn" id="3_omtrn"]
 [ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_p1f1o"]
@@ -8,18 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="6_p1f1o"]
 [ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="8_on4kn"]
-[ext_resource type="Texture2D" uid="uid://bc33f6kj0t35g" path="res://Sprites/All/L cloud.png" id="9_8va2t"]
 [ext_resource type="Texture2D" uid="uid://cq2butychh6px" path="res://Sprites/Interactible/Ladder.PNG" id="9_70gml"]
-[ext_resource type="Texture2D" uid="uid://cyv4ia860yr74" path="res://Sprites/All/Night sky.png" id="10_8mnmb"]
-[ext_resource type="Texture2D" uid="uid://c20vuhkfqildh" path="res://Sprites/All/UpperSky.png" id="10_koko0"]
-[ext_resource type="Texture2D" uid="uid://cessowrqeawsa" path="res://Sprites/All/S cloud.png" id="10_lsb8r"]
-[ext_resource type="Texture2D" uid="uid://dw3sfceb08d6" path="res://Sprites/All/M cloud.png" id="12_ap3ea"]
-[ext_resource type="Texture2D" uid="uid://d4fe7hgxola2h" path="res://Sprites/All/Moon.png" id="14_jb51l"]
 [ext_resource type="Texture2D" uid="uid://d30gom8ufl3xk" path="res://Sprites/All/Window off.png" id="15_dxsep"]
 [ext_resource type="Texture2D" uid="uid://bboe1jmoq66vd" path="res://Sprites/All/Window on.png" id="16_lexqi"]
+[ext_resource type="PackedScene" uid="uid://c4sr2l7efwbqb" path="res://Prefabs/background.tscn" id="17_2nb4t"]
 [ext_resource type="Texture2D" uid="uid://cuen8wcybt7wu" path="res://Sprites/All/Fence.png" id="17_pkgwa"]
 [ext_resource type="Texture2D" uid="uid://cexvmpdt7mufg" path="res://Sprites/All/Grass.png" id="18_radxo"]
 [ext_resource type="FontFile" uid="uid://bkyd3vkt30fdv" path="res://Fonts/antiquity-print.ttf" id="19_dxsep"]
+[ext_resource type="PackedScene" uid="uid://bpelocyiqfvr4" path="res://Prefabs/chicken.tscn" id="22_radxo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkgwa"]
 size = Vector2(856, 627)
@@ -41,10 +38,16 @@ b = Vector2(114, 4)
 font = ExtResource("19_dxsep")
 font_size = 24
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cu4j"]
+size = Vector2(20, 1060)
+
 [node name="Tutorial" type="Node2D"]
 
+[node name="Enemy" parent="." instance=ExtResource("1_pkgwa")]
+position = Vector2(2877, 976)
+
 [node name="Player" parent="." instance=ExtResource("1_feyax")]
-position = Vector2(216, 447)
+position = Vector2(319, 924)
 
 [node name="Ground" parent="." instance=ExtResource("2_omtrn")]
 position = Vector2(959, 1053)
@@ -125,6 +128,7 @@ texture = ExtResource("9_70gml")
 [node name="NinePatchRect6" parent="NinePatchRect5" instance=ExtResource("3_omtrn")]
 modulate = Color(0.721569, 0.721569, 0.721569, 1)
 z_index = -2
+layout_mode = 0
 offset_left = 244.0
 offset_top = -532.0
 offset_right = 820.0
@@ -199,10 +203,12 @@ position = Vector2(-2542, 159.5)
 shape = SubResource("RectangleShape2D_8va2t")
 
 [node name="Ladder" type="Sprite2D" parent="ClimbableArea"]
+z_index = -2
 position = Vector2(-2547, 302)
 texture = ExtResource("9_70gml")
 
 [node name="Ladder2" type="Sprite2D" parent="ClimbableArea"]
+z_index = -2
 position = Vector2(-2547, 25)
 texture = ExtResource("9_70gml")
 
@@ -236,65 +242,6 @@ position = Vector2(1253.93, 453.312)
 position = Vector2(-33.9324, 20.688)
 shape = SubResource("SegmentShape2D_h2ono")
 one_way_collision = true
-
-[node name="Parallax2D" type="Parallax2D" parent="."]
-z_index = -4
-scroll_offset = Vector2(0.1, 0.1)
-repeat_size = Vector2(1920, 0)
-repeat_times = 2
-
-[node name="NightSky" type="Sprite2D" parent="Parallax2D"]
-z_index = -5
-position = Vector2(960, 540)
-texture = ExtResource("10_8mnmb")
-
-[node name="Parallax2D3" type="Parallax2D" parent="."]
-z_index = -4
-scroll_offset = Vector2(0.1, 0.1)
-repeat_size = Vector2(1920, 0)
-autoscroll = Vector2(20, 0)
-repeat_times = 2
-
-[node name="SCloud" type="Sprite2D" parent="Parallax2D3"]
-position = Vector2(3673.9, -3.1)
-texture = ExtResource("10_lsb8r")
-
-[node name="Parallax2D4" type="Parallax2D" parent="."]
-z_index = -4
-scroll_offset = Vector2(0.1, 0.1)
-repeat_size = Vector2(1920, 0)
-autoscroll = Vector2(10, 0)
-repeat_times = 2
-
-[node name="LCloud" type="Sprite2D" parent="Parallax2D4"]
-position = Vector2(3016.9, -335.1)
-texture = ExtResource("9_8va2t")
-
-[node name="Parallax2D5" type="Parallax2D" parent="."]
-z_index = -4
-scroll_offset = Vector2(0.1, 0.1)
-repeat_size = Vector2(1920, 0)
-autoscroll = Vector2(30, 0)
-repeat_times = 2
-
-[node name="MCloud" type="Sprite2D" parent="Parallax2D5"]
-position = Vector2(2052.9, -508.1)
-texture = ExtResource("12_ap3ea")
-
-[node name="Parallax2D2" type="Parallax2D" parent="."]
-z_index = -4
-scroll_offset = Vector2(-1919.9, -1079.9)
-repeat_size = Vector2(1920, 0)
-repeat_times = 2
-
-[node name="NightSky" type="Sprite2D" parent="Parallax2D2"]
-z_index = -5
-position = Vector2(960, 540)
-texture = ExtResource("10_koko0")
-
-[node name="Moon" type="Sprite2D" parent="Parallax2D2"]
-position = Vector2(3651.9, 345.9)
-texture = ExtResource("14_jb51l")
 
 [node name="WindowOff" type="Sprite2D" parent="."]
 position = Vector2(1901, 711)
@@ -361,3 +308,86 @@ text = "Change to the rat mask to shrink down
 and explore small spaces"
 label_settings = SubResource("LabelSettings_lexqi")
 horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 3299.0
+offset_top = 432.0
+offset_right = 3985.0
+offset_bottom = 507.0
+text = "Careful not to be spotted"
+label_settings = SubResource("LabelSettings_lexqi")
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 5803.0
+offset_top = 783.0
+offset_right = 6489.0
+offset_bottom = 858.0
+text = "Eat the chickento finish the level"
+label_settings = SubResource("LabelSettings_lexqi")
+horizontal_alignment = 1
+
+[node name="Chicken" parent="." instance=ExtResource("22_radxo")]
+position = Vector2(6149, 1005)
+level_to_load = "res://Scenes/level_0.tscn"
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(0, 520)
+shape = SubResource("RectangleShape2D_1cu4j")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(6816, 520)
+shape = SubResource("RectangleShape2D_1cu4j")
+
+[node name="NinePatchRect" parent="StaticBody2D5" instance=ExtResource("3_omtrn")]
+offset_left = 6721.0
+offset_top = 427.0
+offset_right = 7661.0
+offset_bottom = 1075.0
+
+[node name="WindowOn" type="Sprite2D" parent="StaticBody2D5/NinePatchRect"]
+position = Vector2(272, 303)
+texture = ExtResource("16_lexqi")
+
+[node name="WindowOn2" type="Sprite2D" parent="StaticBody2D5/NinePatchRect"]
+position = Vector2(675, 531)
+texture = ExtResource("16_lexqi")
+
+[node name="Grass" type="Sprite2D" parent="StaticBody2D5/NinePatchRect"]
+position = Vector2(-9, 601)
+texture = ExtResource("18_radxo")
+
+[node name="Grass2" type="Sprite2D" parent="StaticBody2D5/NinePatchRect"]
+position = Vector2(-2812, 593)
+texture = ExtResource("18_radxo")
+
+[node name="Fence3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6763, 992)
+texture = ExtResource("17_pkgwa")
+
+[node name="Fence4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6643, 1004)
+texture = ExtResource("17_pkgwa")
+
+[node name="Fence5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6522, 1005)
+texture = ExtResource("17_pkgwa")
+
+[node name="Fence6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(5509, 997)
+texture = ExtResource("17_pkgwa")
+flip_h = true
+
+[node name="Fence7" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(5629, 1001)
+texture = ExtResource("17_pkgwa")
+flip_h = true
+
+[node name="Background" parent="." instance=ExtResource("17_2nb4t")]

@@ -39,72 +39,85 @@ var flipped: bool = false
 # whether you are facing left (the sprite is flipped) or not
 var current_animator: AnimatedSprite2D
 
+var feeding : bool = false
+
 signal player_mask_change(new_mask: int)
 
 func _ready() -> void:
+	Global.player = self
 	spawnpoint = global_position
 	current_animator = ester_animator
 
 func _physics_process(delta: float) -> void:
-	current_animator.flip_h = flipped
-	
-	ester_animator.visible = current_animator == ester_animator
-	rat_animator.visible = current_animator == rat_animator
-	rabbit_animator.visible = current_animator == rabbit_animator
-	monkey_animator.visible = current_animator == monkey_animator
-	
-	# Add the gravity.
-	if not is_on_floor():
-		if can_climb and (mask_index == 0 or mask_index == 2): 
-			velocity.y = 0
+	if !feeding:
+		current_animator.flip_h = flipped
+		
+		ester_animator.visible = current_animator == ester_animator
+		rat_animator.visible = current_animator == rat_animator
+		rabbit_animator.visible = current_animator == rabbit_animator
+		monkey_animator.visible = current_animator == monkey_animator
+		
+		# Add the gravity.
+		if not is_on_floor():
+			if can_climb and (mask_index == 0 or mask_index == 2): 
+				velocity.y = 0
+			else:
+				velocity += get_gravity() * delta
+				current_animator.play("Jump")
 		else:
-			velocity += get_gravity() * delta
-			current_animator.play("Jump")
-	else:
-		jump_count = 0
-		lantern_bounces = 0
+			jump_count = 0
+			lantern_bounces = 0
 
-	# Climbing ladders
-	if can_climb and (mask_index == 0 or mask_index == 2):
-		if Input.is_action_pressed("jump"):
-			velocity.y = CLIMB_VELOCITY
+		# Climbing ladders
+		if can_climb and (mask_index == 0 or mask_index == 2):
+			if Input.is_action_pressed("jump"):
+				velocity.y = CLIMB_VELOCITY
+				if not is_on_floor():
+					current_animator.play("Climb")
+			elif Input.is_action_pressed("down") :
+				velocity.y = CLIMB_VELOCITY * -1
 			if not is_on_floor():
 				current_animator.play("Climb")
-		elif Input.is_action_pressed("down") :
-			velocity.y = CLIMB_VELOCITY * -1
-		if not is_on_floor():
-			current_animator.play("Climb")
+			
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * SPEED
+			if direction > 0:
+				flipped = false
+			if direction < 0:
+				flipped = true
+			if is_on_floor():
+				current_animator.play("Walk")
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			if is_on_floor():
+				current_animator.play("Idle")
 		
+		if Input.is_action_just_pressed("jump"):
+				if jump_count < max_jump_count:
+					if mask_index == 1:
+						jump(JUMP_VELOCITY * 1.5)
+					else:
+						jump()
+					jump_count += 1
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
-		if direction > 0:
-			flipped = false
-		if direction < 0:
-			flipped = true
-		if is_on_floor():
-			current_animator.play("Walk")
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		if is_on_floor():
-			current_animator.play("Idle")
-	
-	if Input.is_action_just_pressed("jump"):
-			if jump_count < max_jump_count:
-				jump()
-				jump_count += 1
-
- # none, rabbit, monkey, rat
-	if Input.is_action_just_pressed("mask_next"):
-		mask_change(mask_index + 1 if mask_index + 1 < MASK_LIST.size() else 0)
-		print(MASK_LIST[mask_index])
-	elif Input.is_action_just_pressed("mask_last"):
-		mask_change(mask_index - 1 if mask_index - 1 > -1 else 3)
-		print(MASK_LIST[mask_index])
-	move_and_slide()
+	 # none, rabbit, monkey, rat
+		if Input.is_action_just_pressed("mask_next"):
+			mask_change(mask_index + 1 if mask_index + 1 < MASK_LIST.size() else 0)
+			print(MASK_LIST[mask_index])
+		elif Input.is_action_just_pressed("mask_last"):
+			mask_change(mask_index - 1 if mask_index - 1 > -1 else 3)
+			print(MASK_LIST[mask_index])
+			
+		if Input.is_action_just_pressed("feed") and mask_index == 0:
+			feeding = true
+			current_animator.play("Consume")
+			Global.chicken.eat()
+			
+		move_and_slide()
 	
 func jump(power = JUMP_VELOCITY) -> void:
 		velocity.y = power
