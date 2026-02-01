@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://m65fnyh6tuyl"
+path="res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Vocal_Deeper.mp3-939a842b8739dcd4614f6462ffe6c5c6.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_Toryanse_Vocal_Deeper.mp3"
+dest_files=["res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Vocal_Deeper.mp3-939a842b8739dcd4614f6462ffe6c5c6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

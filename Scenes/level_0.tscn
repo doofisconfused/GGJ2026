@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="5_ibbt5"]
 [ext_resource type="Texture2D" uid="uid://cq2butychh6px" path="res://Sprites/Interactible/Ladder.PNG" id="6_ughle"]
 [ext_resource type="PackedScene" uid="uid://bpelocyiqfvr4" path="res://Prefabs/chicken.tscn" id="7_ibbt5"]
-[ext_resource type="PackedScene" path="res://Prefabs/enemy.tscn" id="7_ughle"]
+[ext_resource type="PackedScene" uid="uid://i2eb6xaow85r" path="res://Prefabs/enemy.tscn" id="7_ughle"]
 [ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="9_5xren"]
 [ext_resource type="Texture2D" uid="uid://bboe1jmoq66vd" path="res://Sprites/All/Window on.png" id="10_uu2ix"]
 [ext_resource type="Texture2D" uid="uid://d30gom8ufl3xk" path="res://Sprites/All/Window off.png" id="11_n6y2o"]
@@ -57,6 +57,7 @@ position = Vector2(10560, 1052)
 
 [node name="Player" parent="." instance=ExtResource("2_8ryqv")]
 position = Vector2(191, 944)
+collision_layer = 1
 
 [node name="Background" parent="." instance=ExtResource("3_31js7")]
 

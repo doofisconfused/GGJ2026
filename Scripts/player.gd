@@ -98,6 +98,9 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("jump"):
 				if jump_count < max_jump_count:
+					if mask_index == 0:
+						$AudioStreamPlayer.play()
+					
 					if mask_index == 1:
 						jump(JUMP_VELOCITY * 1.5)
 					else:
@@ -122,13 +125,16 @@ func _physics_process(delta: float) -> void:
 func jump(power = JUMP_VELOCITY) -> void:
 		velocity.y = power
 		current_animator.play("Jump")
+		$JumpFX.restart()
 
 func mask_change(new_mask: int) -> void:
-	if (left_ester_cast.is_colliding() or right_ester_cast.is_colliding()) and new_mask == 0:
+	if (left_ester_cast.is_colliding() or right_ester_cast.is_colliding()) and new_mask <= 2:
 		return
 	else:
 		mask_index = new_mask
 		var mask: String = MASK_LIST[mask_index]
+		
+		$MaskChange.restart()
 		
 		# jumps:
 		max_jump_count = 2 if mask == "rabbit" else 1

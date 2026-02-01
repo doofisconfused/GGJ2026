@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c272fey7j5x5c"
+path="res://.godot/imported/HauntedLullabiesofJapan_Kazoe Uta.mp3-251509d4692f08bc8a2520a9f969e79b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_Kazoe Uta.mp3"
+dest_files=["res://.godot/imported/HauntedLullabiesofJapan_Kazoe Uta.mp3-251509d4692f08bc8a2520a9f969e79b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

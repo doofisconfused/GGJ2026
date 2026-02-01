@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3bbijq8dwh8e"
+path="res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Sad.mp3-3152f5720c7d55cf6fbb7170268f1612.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_Toryanse_Sad.mp3"
+dest_files=["res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Sad.mp3-3152f5720c7d55cf6fbb7170268f1612.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

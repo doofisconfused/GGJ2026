@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8yb0h5jf1tio"]
+[gd_scene load_steps=36 format=3 uid="uid://b8yb0h5jf1tio"]
 
 [ext_resource type="Script" uid="uid://da52bnrt3fh4x" path="res://Scripts/player.gd" id="1_y6xdh"]
 [ext_resource type="Texture2D" uid="uid://b62lwx7am2s6" path="res://Sprites/Player/Ester/Ester stand.PNG" id="2_5wxv7"]
@@ -13,6 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://d2ythy24lm3sg" path="res://Sprites/Player/Monkey/Monkey move.PNG" id="10_m62uw"]
 [ext_resource type="Texture2D" uid="uid://b2ejd8n63vo30" path="res://Sprites/Player/Rat stand.PNG" id="11_b30ri"]
 [ext_resource type="Texture2D" uid="uid://ci7hxspashqup" path="res://Sprites/Player/Rat move.PNG" id="12_3vpsw"]
+[ext_resource type="AudioStream" uid="uid://ccf8qxwb14oih" path="res://Sounds/001_jump.wav" id="14_wphcr"]
+[ext_resource type="AudioStream" uid="uid://c5p06gix24ygp" path="res://Sounds/002_jump.wav" id="15_and0b"]
+[ext_resource type="AudioStream" uid="uid://cmwwjpr5eda5f" path="res://Sounds/003_jump.wav" id="16_405c5"]
+[ext_resource type="AudioStream" uid="uid://dlml72ygovpmq" path="res://Sounds/004_jump.wav" id="17_i3mxk"]
+[ext_resource type="AudioStream" uid="uid://uj8f5vo7yyyn" path="res://Sounds/005_jump.wav" id="18_qvmbc"]
+[ext_resource type="Texture2D" uid="uid://c7160wprnyaus" path="res://Sprites/All/Transformation sparkle particle.png" id="19_and0b"]
+[ext_resource type="Texture2D" uid="uid://cuytjjsp4bj4b" path="res://Sprites/All/Jump particle_.png" id="20_405c5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qbli"]
 animations = [{
@@ -206,6 +213,49 @@ height = 85.7717
 radius = 26.6667
 height = 53.3333
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qjulh"]
+streams_count = 5
+stream_0/stream = ExtResource("14_wphcr")
+stream_1/stream = ExtResource("15_and0b")
+stream_2/stream = ExtResource("16_405c5")
+stream_3/stream = ExtResource("17_i3mxk")
+stream_4/stream = ExtResource("18_qvmbc")
+
+[sub_resource type="Curve" id="Curve_405c5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i3mxk"]
+curve = SubResource("Curve_405c5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qvmbc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 64, 1)
+angle_min = -190.3
+angle_max = 41.4
+spread = 180.0
+initial_velocity_min = 17.24
+initial_velocity_max = 34.48
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_i3mxk")
+
+[sub_resource type="Curve" id="Curve_i3mxk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.757353, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qvmbc"]
+curve = SubResource("Curve_i3mxk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qjulh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+spread = 180.0
+initial_velocity_max = 28.73
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_qvmbc")
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_layer = 32
@@ -297,5 +347,27 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea2D"]
 position = Vector2(0, 38)
 shape = SubResource("CapsuleShape2D_b30ri")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qjulh")
+bus = &"Player"
+
+[node name="MaskChange" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 200
+texture = ExtResource("19_and0b")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qvmbc")
+
+[node name="JumpFX" type="GPUParticles2D" parent="."]
+position = Vector2(0, 60.6667)
+emitting = false
+amount = 16
+texture = ExtResource("20_405c5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qjulh")
 
 [connection signal="area_entered" from="BounceArea2D" to="." method="_on_bounce_area_body_entered"]

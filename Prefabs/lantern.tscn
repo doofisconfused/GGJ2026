@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyx06f1cmdryt"]
+[gd_scene load_steps=15 format=3 uid="uid://cyx06f1cmdryt"]
 
 [ext_resource type="Script" uid="uid://bfdqnsnfejwi7" path="res://Scripts/bounce_area.gd" id="1_i2rm8"]
 [ext_resource type="Texture2D" uid="uid://cw4tpkiiieqaw" path="res://Sprites/Interactible/Hanging lantern.png" id="2_bknfb"]
+[ext_resource type="AudioStream" uid="uid://6dyb04jfkdwi" path="res://Sounds/balloon 1.wav" id="3_7sr1e"]
+[ext_resource type="Texture2D" uid="uid://cwktira3ximvc" path="res://Sprites/All/fire particle.png" id="4_k5d3m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3y5y"]
 radius = 11.0028
@@ -43,6 +45,39 @@ _data = {
 &"bounce": SubResource("Animation_bknfb")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k5d3m"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("3_7sr1e")
+
+[sub_resource type="Gradient" id="Gradient_vhemj"]
+offsets = PackedFloat32Array(0, 0.327273, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.780587, 0.640758, 0.0636369, 1, 0.765675, 0.616343, 5.77569e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o1kxm"]
+gradient = SubResource("Gradient_vhemj")
+
+[sub_resource type="Curve" id="Curve_w7mlf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sym6y"]
+curve = SubResource("Curve_w7mlf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ew6vh"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 55.0
+angle_min = -66.2
+angle_max = 82.8
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 28.74
+initial_velocity_max = 80.46
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_sym6y")
+color_ramp = SubResource("GradientTexture1D_o1kxm")
+
 [node name="BounceArea" type="Area2D"]
 collision_layer = 4
 collision_mask = 4
@@ -63,5 +98,17 @@ debug_color = Color(0.852921, 0.37007, 3.85046e-07, 0.42)
 libraries = {
 &"": SubResource("AnimationLibrary_k5d3m")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_k5d3m")
+bus = &"Sfx"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+texture = ExtResource("4_k5d3m")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ew6vh")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

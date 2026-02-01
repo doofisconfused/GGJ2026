@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bi7h5jxc12sh6"
+path="res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Vocal_PitchedUp).mp3-defc2c458c71eb680e8d4ecf092ad100.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_Toryanse_Vocal_PitchedUp).mp3"
+dest_files=["res://.godot/imported/HauntedLullabiesofJapan_Toryanse_Vocal_PitchedUp).mp3-defc2c458c71eb680e8d4ecf092ad100.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

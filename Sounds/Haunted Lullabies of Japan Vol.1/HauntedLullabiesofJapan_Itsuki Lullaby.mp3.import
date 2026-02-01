@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7rg8cvyff4ie"
+path="res://.godot/imported/HauntedLullabiesofJapan_Itsuki Lullaby.mp3-bb0dd6fe5da9b1fb70e7ac47c3fad6b8.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_Itsuki Lullaby.mp3"
+dest_files=["res://.godot/imported/HauntedLullabiesofJapan_Itsuki Lullaby.mp3-bb0dd6fe5da9b1fb70e7ac47c3fad6b8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

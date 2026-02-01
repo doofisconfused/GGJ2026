@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://goutf0u6o5d5"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="1_feyax"]
-[ext_resource type="PackedScene" path="res://Prefabs/enemy.tscn" id="1_pkgwa"]
+[ext_resource type="PackedScene" uid="uid://i2eb6xaow85r" path="res://Prefabs/enemy.tscn" id="1_pkgwa"]
 [ext_resource type="PackedScene" uid="uid://dxdrxmqespfnr" path="res://Prefabs/ground.tscn" id="2_omtrn"]
 [ext_resource type="PackedScene" uid="uid://dieg7s4xydh82" path="res://Prefabs/house.tscn" id="3_omtrn"]
 [ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_p1f1o"]
