@@ -42,6 +42,7 @@ var current_animator: AnimatedSprite2D
 var feeding : bool = false
 
 signal player_mask_change(new_mask: int)
+signal reset_aggro()
 
 func _ready() -> void:
 	Global.player = self
@@ -174,6 +175,6 @@ func _on_checkpoint_set(new_spawnpoint: Vector2) -> void:
 	print(spawnpoint)
 
 
-
-func _on_death() -> void:
+func death() -> void:
 	global_position = spawnpoint # Replace with function body.
+	reset_aggro.emit()

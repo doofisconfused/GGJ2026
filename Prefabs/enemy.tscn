@@ -26,18 +26,19 @@ texture = ExtResource("1_leowk")
 offset = Vector2(-2.9, 0)
 
 [node name="UpperRay" type="RayCast2D" parent="."]
-position = Vector2(0, -24.6667)
+position = Vector2(-12.6667, -24.6667)
 rotation = -1.5708
 target_position = Vector2(0, 400.09)
 collision_mask = 33
 
 [node name="MiddleRay" type="RayCast2D" parent="."]
+position = Vector2(-12.6667, 3.30607e-05)
 rotation = 4.71239
 target_position = Vector2(0, 400)
 collision_mask = 33
 
 [node name="LowerRay" type="RayCast2D" parent="."]
-position = Vector2(0, 20)
+position = Vector2(-12.6667, 20)
 rotation = -1.5708
 target_position = Vector2(0, 400.09)
 collision_mask = 33
