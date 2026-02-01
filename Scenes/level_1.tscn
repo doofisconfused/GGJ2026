@@ -511,4 +511,4 @@ texture = ExtResource("13_8yhm2")
 
 [node name="Chicken" parent="." instance=ExtResource("14_pjppf")]
 position = Vector2(10296, -1469)
-level_to_load = "res://Scenes/level_2.tscm"
+level_to_load = "res://Scenes/lmain_menu.tscn"
