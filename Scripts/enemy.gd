@@ -27,6 +27,8 @@ var enemy_suspicion: String = "normal" # normal, suspicion, aggro
 # suspicion - enemy will enter aggro if player stays in sight for too long. monkey triggers this
 # aggro - enemy chases limited distance after player before returning to suspicion, then normal
 
+var player_changed: bool = false
+
 func _ready() -> void:
 	origin = global_position
 	destination = global_position + Vector2(walkDistance if facing_right else walkDistance * -1, global_position.y)
@@ -36,13 +38,28 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	enemy_sprite.flip_h = not facing_right
 	upper_ray.target_position = Vector2(0, 400 if facing_right else -400)
+	middle_ray.target_position = Vector2(0, 400 if facing_right else -400)
 	lower_ray.target_position = Vector2(0, 400 if facing_right else -400)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
+	
+	var scanned_player
 	if upper_ray.is_colliding():
-			print("AAH! AAH OH SHIT FUCK WHAT DO I DO!! AAAH! OH NO AAH!")
+			if upper_ray.get_collider().is_class("CharacterBody2D"):
+				scanned_player = upper_ray.get_collider()
+			elif lower_ray.get_collider().is_class("CharacterBody2D"):
+				scanned_player = lower_ray.get_collider()
+			elif middle_ray.get_collider().is_class("CharacterBody2D"):
+				scanned_player = middle_ray.get_collider()
+	if scanned_player:
+		if scanned_player.mask_index == 0:
+			enemy_suspicion = "aggro"
+			peace_timer = TIME_TO_COOLDOWN
+		if scanned_player.mask_index == 2:
+			enemy_suspicion = "suspicious"
+		if player_changed:
+			enemy_suspicion = "aggro"
 		
 	if enemy_suspicion == "normal":
 		if origin.x < destination.x:
@@ -56,6 +73,10 @@ func _physics_process(delta: float) -> void:
 				facing_right = true
 			if global_position.x <= origin.x:
 				facing_right = false
+				
+	if enemy_suspicion == "aggro":
+		print("i'm angry!!!!!!!")
+		enemy_suspicion = "normal"
 	
 	# if enemy is outside the two points set for them to walk, they flip
 	# sorry there's probably a more eloquent way to do this. if it doesn't work
@@ -63,3 +84,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.x = SPEED * (1 if facing_right else -1)
 	move_and_slide()
+	
+
+
+
+func _on_player_player_mask_change(_new_mask: int) -> void:
+	player_changed = true
