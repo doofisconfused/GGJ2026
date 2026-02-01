@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://goutf0u6o5d5"]
+[gd_scene load_steps=24 format=3 uid="uid://goutf0u6o5d5"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="1_feyax"]
 [ext_resource type="PackedScene" uid="uid://i2eb6xaow85r" path="res://Prefabs/enemy.tscn" id="1_pkgwa"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dieg7s4xydh82" path="res://Prefabs/house.tscn" id="3_omtrn"]
 [ext_resource type="PackedScene" uid="uid://kaiom78vsbm2" path="res://Prefabs/string.tscn" id="4_p1f1o"]
 [ext_resource type="Texture2D" uid="uid://cr7bi4po32d28" path="res://Sprites/All/Door.png" id="5_lexqi"]
-[ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="6_p1f1o"]
 [ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="6_ys4pu"]
 [ext_resource type="PackedScene" uid="uid://dndosof1pmkvl" path="res://Prefabs/climbable_area.tscn" id="8_on4kn"]
 [ext_resource type="Texture2D" uid="uid://cq2butychh6px" path="res://Sprites/Interactible/Ladder.PNG" id="9_70gml"]
@@ -183,9 +182,6 @@ position = Vector2(2680, 533)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
 polygon = PackedVector2Array(107, 48, 168, 74, 188, 74, 198, 57, 158, 41, 125, 17, 69, -36, -78, -36, -150, 29, -207, 56, -207, 72, -178, 75, -114, 47)
 
-[node name="Checkpoint" parent="StaticBody2D2" instance=ExtResource("6_p1f1o")]
-position = Vector2(-776, -129)
-
 [node name="BounceArea" parent="StaticBody2D2" instance=ExtResource("6_ys4pu")]
 position = Vector2(326, -48)
 
@@ -323,7 +319,8 @@ offset_left = 5803.0
 offset_top = 783.0
 offset_right = 6489.0
 offset_bottom = 858.0
-text = "Eat the chickento finish the level"
+text = "Consume the chicken as Ester
+ to finish the level"
 label_settings = SubResource("LabelSettings_lexqi")
 horizontal_alignment = 1
 
