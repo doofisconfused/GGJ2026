@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2pllmp3pjgh3"
+path="res://.godot/imported/Snowfall (Looped ver.).ogg-befe651519a1260bef602ecdc4851341.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/OGA Music/Snowfall (Looped ver.).ogg"
+dest_files=["res://.godot/imported/Snowfall (Looped ver.).ogg-befe651519a1260bef602ecdc4851341.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

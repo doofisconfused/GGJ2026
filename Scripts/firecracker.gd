@@ -9,6 +9,10 @@ var flight_timer: float = 3
 # how long the firecracker should fly for before it explodes
 var persist_timer: float = 1
 #how long the explosion should last
+var new_particles = load("res://Prefabs/firecracker_particles.tscn")
+
+var particles_spawned: bool = false
+# whether particles have already been spawned
 
 signal death()
 
@@ -22,6 +26,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		freeze = true
 		sleeping = true
+		if not particles_spawned:
+			var particles = new_particles.instantiate()
+			add_child(particles)
+			particles_spawned = true
 		explosion.get_child(0).disabled = false
 		persist_timer -= delta
 		if persist_timer <= 0: queue_free()

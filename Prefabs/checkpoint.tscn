@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://3f7ldxh8vr67" path="res://Sprites/Interactible/Lantern float.PNG" id="2_q7jp7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scjsw"]
+radius = 11.2069
+height = 87.931
 
 [node name="Checkpoint" type="Area2D"]
 collision_layer = 8

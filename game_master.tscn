@@ -1,19 +1,19 @@
 [gd_scene load_steps=9 format=3 uid="uid://dhvejpx6ilyaf"]
 
 [ext_resource type="PackedScene" uid="uid://dihpedofv0082" path="res://Prefabs/fade.tscn" id="1_5yk56"]
-[ext_resource type="AudioStream" uid="uid://b67pwprka1n5q" path="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_TakedaLullaby II.mp3" id="2_d8xmc"]
-[ext_resource type="AudioStream" uid="uid://ox5ggoydximm" path="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_TakedaLullaby.mp3" id="3_emkk8"]
-[ext_resource type="AudioStream" uid="uid://cniba7ccqli7q" path="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_TakedaLullabyIII.mp3" id="4_7y85e"]
-[ext_resource type="AudioStream" uid="uid://cntxoircl6ek0" path="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_TakedaLullabyKoto.mp3" id="5_ytkon"]
-[ext_resource type="AudioStream" uid="uid://b4nceqndox7a6" path="res://Sounds/Haunted Lullabies of Japan Vol.1/HauntedLullabiesofJapan_TakedaLullabyWarped.mp3" id="6_hpdjk"]
+[ext_resource type="AudioStream" uid="uid://q24r58adit2k" path="res://Sounds/OGA Music/Next to You.mp3" id="2_d8xmc"]
+[ext_resource type="AudioStream" uid="uid://b3ux6pphr86jj" path="res://Sounds/OGA Music/Path to Lake Land.ogg" id="3_emkk8"]
+[ext_resource type="AudioStream" uid="uid://d3ndhvc48d3p4" path="res://Sounds/OGA Music/shrine.ogg" id="4_7y85e"]
+[ext_resource type="AudioStream" uid="uid://d2pllmp3pjgh3" path="res://Sounds/OGA Music/Snowfall (Looped ver.).ogg" id="5_ytkon"]
+[ext_resource type="AudioStream" uid="uid://dwkpypmdhon64" path="res://Sounds/OGA Music/song17.mp3" id="6_hpdjk"]
 [ext_resource type="Script" uid="uid://jc133bckvln6" path="res://Scripts/music_player.gd" id="7_fa2km"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_1g2ts"]
 stream_count = 5
-stream_0 = ExtResource("2_d8xmc")
-stream_1 = ExtResource("3_emkk8")
-stream_2 = ExtResource("4_7y85e")
-stream_3 = ExtResource("5_ytkon")
+stream_0 = ExtResource("4_7y85e")
+stream_1 = ExtResource("5_ytkon")
+stream_2 = ExtResource("3_emkk8")
+stream_3 = ExtResource("2_d8xmc")
 stream_4 = ExtResource("6_hpdjk")
 
 [node name="GameMaster" type="Node2D"]

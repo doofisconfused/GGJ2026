@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwkpypmdhon64"
+path="res://.godot/imported/song17.mp3-bcf53aa186060e1e8b5a008d0f10adcc.mp3str"
+
+[deps]
+
+source_file="res://Sounds/OGA Music/song17.mp3"
+dest_files=["res://.godot/imported/song17.mp3-bcf53aa186060e1e8b5a008d0f10adcc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var game_master: Node2D = $/root/GameMaster
 
 const SPEED: float = 200.0
-const AGGRO_SPEED: float =  300.0
+const AGGRO_SPEED: float =  250.0
 const TIME_TO_AGGRO: float = 3
 const TIME_TO_COOLDOWN: float = 10
 
@@ -102,6 +102,7 @@ func _physics_process(delta: float) -> void:
 
 				
 	if enemy_suspicion == "aggro":
+		watching_eye.offset = Vector2(randf_range(0, 5), randf_range(0, 5))
 		aggression_timer = TIME_TO_AGGRO
 		peace_timer -= delta
 		firecracker_timer -= delta
