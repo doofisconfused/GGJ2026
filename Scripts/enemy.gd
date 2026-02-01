@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var lower_ray: RayCast2D = $LowerRay
 @onready var enemy_sprite: Sprite2D = $EnemySprite
 @onready var watching_eye: Sprite2D = $WatchedSymbol
+@onready var wall_detector: CollisionShape2D = $WallDetector/CollisionShape2D
 
 const SPEED = 200.0
 const TIME_TO_AGGRO: float = 3
@@ -30,16 +31,14 @@ var player_changed: bool = false
 # true if the player changed masks this frame. used for determining aggro.
 
 func _ready() -> void:
-	origin = global_position
-	destination = global_position + Vector2(walkDistance if facing_right else walkDistance * -1, global_position.y)
-	print(origin)
-	print(destination)
+	set_walk_points()
 
 func _physics_process(delta: float) -> void:
 	enemy_sprite.flip_h = not facing_right
 	upper_ray.target_position = Vector2(0, 400 if facing_right else -400)
 	middle_ray.target_position = Vector2(0, 400 if facing_right else -400)
 	lower_ray.target_position = Vector2(0, 400 if facing_right else -400)
+	wall_detector.position.x = 14 if facing_right else -14
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -73,9 +72,9 @@ func _physics_process(delta: float) -> void:
 				print(global_position.x)
 				facing_right = true
 		else:
-			if global_position.x >= destination.x:
+			if global_position.x <= destination.x:
 				facing_right = true
-			if global_position.x <= origin.x:
+			if global_position.x >= origin.x:
 				facing_right = false
 		watching_eye.modulate = Color.WHITE
 				
@@ -85,13 +84,25 @@ func _physics_process(delta: float) -> void:
 		if peace_timer <= 0: enemy_suspicion = "normal"
 		
 		
+		
 	if enemy_suspicion == "suspicious":
 		aggression_timer -= delta
 		print(aggression_timer)
 		watching_eye.modulate = Color.YELLOW.lerp(Color.WHITE, aggression_timer / TIME_TO_AGGRO)
 		if aggression_timer <= 0: 
 			enemy_suspicion = "aggro"
-	
+			
+		if origin.x < destination.x:
+			if global_position.x >= destination.x:
+				facing_right = false
+			if global_position.x < origin.x:
+				print(global_position.x)
+				facing_right = true
+		else:
+			if global_position.x <= destination.x:
+				facing_right = true
+			if global_position.x >= origin.x:
+				facing_right = false
 	# if enemy is outside the two points set for them to walk, they flip
 	# sorry there's probably a more eloquent way to do this. if it doesn't work
 	# or you want it done differently i'll change it
@@ -100,6 +111,19 @@ func _physics_process(delta: float) -> void:
 	player_changed = false
 	move_and_slide()
 
+func set_walk_points() -> void:
+	origin = global_position
+	destination = global_position + Vector2(walkDistance if facing_right else walkDistance * -1, global_position.y)
+	print(origin)
+	print(destination)
+	
 
 func _on_player_player_mask_change(_new_mask: int) -> void:
 	player_changed = true
+
+
+func _on_wall_detector_body_entered(body: Node2D) -> void:
+	if body.is_class("StaticBody2D"):
+		facing_right = not facing_right
+	set_walk_points()
+		

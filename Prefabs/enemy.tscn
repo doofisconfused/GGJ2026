@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://i2eb6xaow85r"]
+[gd_scene load_steps=6 format=3 uid="uid://i2eb6xaow85r"]
 
 [ext_resource type="Texture2D" uid="uid://dyhhhl2pb3g1" path="res://Sprites/Enemy/Adult NPC.PNG" id="1_leowk"]
 [ext_resource type="Script" uid="uid://bt6ib3rpp3myc" path="res://Scripts/enemy.gd" id="1_t4g6b"]
@@ -8,8 +8,12 @@
 radius = 13.3333
 height = 86.6667
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4g6b"]
+size = Vector2(5.33333, 82)
+
 [node name="Enemy" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
+collision_layer = 16
 script = ExtResource("1_t4g6b")
 
 [node name="WatchedSymbol" type="Sprite2D" parent="."]
@@ -25,16 +29,28 @@ offset = Vector2(-2.9, 0)
 position = Vector2(0, -24.6667)
 rotation = -1.5708
 target_position = Vector2(0, 400.09)
+collision_mask = 33
 
 [node name="MiddleRay" type="RayCast2D" parent="."]
 rotation = 4.71239
 target_position = Vector2(0, 400)
+collision_mask = 33
 
 [node name="LowerRay" type="RayCast2D" parent="."]
 position = Vector2(0, 20)
 rotation = -1.5708
 target_position = Vector2(0, 400.09)
+collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.33333)
 shape = SubResource("CapsuleShape2D_t4g6b")
+
+[node name="WallDetector" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+position = Vector2(14, -3)
+shape = SubResource("RectangleShape2D_t4g6b")
+
+[connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
