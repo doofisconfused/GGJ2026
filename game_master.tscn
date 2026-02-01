@@ -80,11 +80,11 @@ debug_color = Color(1, 0.009919, 0.0323908, 0.42)
 [node name="Enemy" parent="." instance=ExtResource("1_emkk8")]
 position = Vector2(2139, 548)
 
-[connection signal="player_mask_change" from="Player" to="Enemy" method="_on_player_player_mask_change"]
 [connection signal="player_mask_change" from="Player" to="Player" method="_on_player_mask_change"]
+[connection signal="player_mask_change" from="Player" to="Enemy" method="_on_player_player_mask_change"]
 [connection signal="area_entered" from="BounceArea" to="Player" method="_on_lantern_area_entered"]
 [connection signal="body_entered" from="BounceArea" to="Player" method="_on_bounce_area_body_entered"]
-[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
 [connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_checkpoint_set"]
+[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
 [connection signal="area_entered" from="DeathBox" to="DeathBox" method="_on_area_entered"]
 [connection signal="death" from="DeathBox" to="Player" method="_on_death"]
