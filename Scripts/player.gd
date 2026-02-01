@@ -39,10 +39,11 @@ var flipped: bool = false
 # whether you are facing left (the sprite is flipped) or not
 var current_animator: AnimatedSprite2D
 
+signal player_mask_change(new_mask: int)
+
 func _ready() -> void:
 	spawnpoint = global_position
 	current_animator = ester_animator
-	pass
 
 func _physics_process(delta: float) -> void:
 	current_animator.flip_h = flipped
@@ -54,21 +55,25 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
-		current_animator.play("Jump")
+		if can_climb and (mask_index == 0 or mask_index == 2): 
+			velocity.y = 0
+		else:
+			velocity += get_gravity() * delta
+			current_animator.play("Jump")
 	else:
 		jump_count = 0
 		lantern_bounces = 0
 
-	# Handle jump.
-	
-	
 	# Climbing ladders
-	if can_climb:
-		if Input.is_action_pressed("jump") and (mask_index == 0 or mask_index == 2):
+	if can_climb and (mask_index == 0 or mask_index == 2):
+		if Input.is_action_pressed("jump"):
 			velocity.y = CLIMB_VELOCITY
 			if not is_on_floor():
 				current_animator.play("Climb")
+		elif Input.is_action_pressed("down") :
+			velocity.y = CLIMB_VELOCITY * -1
+		if not is_on_floor():
+			current_animator.play("Climb")
 		
 
 	# Get the input direction and handle the movement/deceleration.
@@ -135,6 +140,7 @@ func mask_change(new_mask: int) -> void:
 				current_animator = rat_animator
 			_:
 				current_animator = ester_animator
+		player_mask_change.emit(new_mask)
 		
 func _on_bounce_area_body_entered(_body: Node2D) -> void:
 	if mask_index == 2:

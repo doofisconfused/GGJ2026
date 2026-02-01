@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://i2eb6xaow85r"]
+[gd_scene load_steps=5 format=3 uid="uid://i2eb6xaow85r"]
 
 [ext_resource type="Texture2D" uid="uid://dyhhhl2pb3g1" path="res://Sprites/Enemy/Adult NPC.PNG" id="1_leowk"]
+[ext_resource type="Script" uid="uid://bt6ib3rpp3myc" path="res://Scripts/enemy.gd" id="1_t4g6b"]
+[ext_resource type="Texture2D" uid="uid://hotxd5i72txs" path="res://Sprites/Enemy/Watched symbol.PNG" id="2_30yes"]
 
-[node name="Enemy" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4g6b"]
+radius = 13.3333
+height = 86.6667
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_t4g6b")
+
+[node name="WatchedSymbol" type="Sprite2D" parent="."]
+position = Vector2(0, -65.3333)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_30yes")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_leowk")
+offset = Vector2(-2.9, 0)
+
+[node name="UpperRay" type="RayCast2D" parent="."]
+position = Vector2(0, -24.6667)
+rotation = -1.5708
+target_position = Vector2(0, 400.09)
+
+[node name="MiddleRay" type="RayCast2D" parent="."]
+rotation = 4.71239
+target_position = Vector2(0, 400)
+
+[node name="LowerRay" type="RayCast2D" parent="."]
+position = Vector2(0, 20)
+rotation = -1.5708
+target_position = Vector2(0, 400.09)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.33333)
+shape = SubResource("CapsuleShape2D_t4g6b")

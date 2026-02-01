@@ -216,6 +216,7 @@ frame_progress = 0.523165
 speed_scale = 0.8
 
 [node name="RabbitAnimations" type="AnimatedSprite2D" parent="Animations"]
+visible = false
 position = Vector2(-0.333333, 29.5)
 sprite_frames = SubResource("SpriteFrames_08u7w")
 animation = &"Idle"
@@ -239,16 +240,22 @@ position = Vector2(0, 16.6667)
 scale = Vector2(1, 0.808347)
 shape = SubResource("CapsuleShape2D_5wxv7")
 
+[node name="PlayerTag" type="Node2D" parent="EsterCollider"]
+
 [node name="RatCollider" type="CollisionShape2D" parent="."]
 position = Vector2(1.42109e-14, 50.6667)
 scale = Vector2(1, 0.808347)
 shape = SubResource("CapsuleShape2D_3vpsw")
 debug_color = Color(0.910832, 0.000103577, 0.728675, 0.42)
 
+[node name="PlayerTag" type="Node2D" parent="RatCollider"]
+
 [node name="AnimalCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-0.333333, 38.1667)
 scale = Vector2(1, 0.596228)
 shape = SubResource("CapsuleShape2D_m62uw")
+
+[node name="PlayerTag" type="Node2D" parent="AnimalCollider"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
