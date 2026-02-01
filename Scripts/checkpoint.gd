@@ -18,10 +18,16 @@ func _physics_process(delta: float) -> void:
 			get_child(1).position.y -= delta * 50
 		else:
 			get_child(1).position.y += delta * 50
+	else:
+		if floatingUp:
+			get_child(1).position.y -= delta * 200
+		else:
+			get_child(1).position.y += delta * 200
 		#print(cycle)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and not activated:
 		checkpoint_set.emit(global_position)
 		activated = true
+		floating = "high"
 		print("activated") # Replace with function body.

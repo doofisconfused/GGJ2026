@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8yb0h5jf1tio"]
+[gd_scene load_steps=21 format=3 uid="uid://b8yb0h5jf1tio"]
 
 [ext_resource type="Script" uid="uid://da52bnrt3fh4x" path="res://Scripts/player.gd" id="1_y6xdh"]
 [ext_resource type="Texture2D" uid="uid://b62lwx7am2s6" path="res://Sprites/Player/Ester/Ester stand.PNG" id="2_5wxv7"]
@@ -198,6 +198,10 @@ height = 32.0
 radius = 26.0
 height = 85.7717
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b30ri"]
+radius = 26.6667
+height = 53.3333
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_y6xdh")
@@ -254,6 +258,8 @@ shape = SubResource("CapsuleShape2D_m62uw")
 [node name="PlayerTag" type="Node2D" parent="AnimalCollider"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_bottom = 1080
 
 [node name="LeftEsterCast" type="RayCast2D" parent="."]
 position = Vector2(-24, 0)
@@ -279,3 +285,13 @@ collision_mask = 10
 position = Vector2(0, 16.6667)
 scale = Vector2(1, 0.808347)
 shape = SubResource("CapsuleShape2D_5wxv7")
+
+[node name="BounceArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea2D"]
+position = Vector2(0, 38)
+shape = SubResource("CapsuleShape2D_b30ri")
+
+[connection signal="area_entered" from="BounceArea2D" to="." method="_on_bounce_area_body_entered"]
