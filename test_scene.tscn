@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl8khpb8of57k"]
+[gd_scene load_steps=13 format=3 uid="uid://bl8khpb8of57k"]
 
 [ext_resource type="PackedScene" uid="uid://b8yb0h5jf1tio" path="res://Prefabs/player.tscn" id="1_buypi"]
 [ext_resource type="PackedScene" uid="uid://cyx06f1cmdryt" path="res://Prefabs/lantern.tscn" id="2_njel3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqmnxnhmf852u" path="res://Prefabs/checkpoint.tscn" id="6_4gito"]
 [ext_resource type="Script" uid="uid://cd36ehwg7kcnv" path="res://Scripts/death_box.gd" id="7_fbuy2"]
 [ext_resource type="PackedScene" uid="uid://i2eb6xaow85r" path="res://Prefabs/enemy.tscn" id="8_0k8yu"]
+[ext_resource type="PackedScene" uid="uid://dbih2bcqhjnio" path="res://Prefabs/firecracker.tscn" id="9_njel3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ef5b"]
 size = Vector2(4021.43, 263)
@@ -80,11 +81,17 @@ debug_color = Color(1, 0.009919, 0.0323908, 0.42)
 [node name="Enemy" parent="." instance=ExtResource("8_0k8yu")]
 position = Vector2(3131, 526)
 
+[node name="Firecracker" parent="." instance=ExtResource("9_njel3")]
+position = Vector2(2463, 217)
+
 [connection signal="player_mask_change" from="Player" to="Player" method="_on_player_mask_change"]
 [connection signal="player_mask_change" from="Player" to="Enemy" method="_on_player_player_mask_change"]
+[connection signal="reset_aggro" from="Player" to="Enemy" method="_on_player_reset_aggro"]
 [connection signal="area_entered" from="BounceArea" to="Player" method="_on_lantern_area_entered"]
 [connection signal="body_entered" from="BounceArea" to="Player" method="_on_bounce_area_body_entered"]
-[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
 [connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_checkpoint_set"]
+[connection signal="checkpoint_set" from="Checkpoint" to="Player" method="_on_checkpoint_set"]
 [connection signal="area_entered" from="DeathBox" to="DeathBox" method="_on_area_entered"]
 [connection signal="death" from="DeathBox" to="Player" method="_on_death"]
+[connection signal="body_shape_entered" from="Firecracker" to="Firecracker" method="_on_body_entered"]
+[connection signal="death" from="Firecracker" to="Player" method="_on_death"]

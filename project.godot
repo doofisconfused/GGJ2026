@@ -68,6 +68,7 @@ feed={
 }
 
 [layer_names]
+
 2d_render/layer_1="Terrain"
 2d_render/layer_2="Climbables"
 2d_physics/layer_1="Terrain"
@@ -77,5 +78,5 @@ feed={
 2d_physics/layer_5="Enemy"
 
 [rendering]
-environment/defaults/default_clear_color=Color(0.0431373, 0.0784314, 0.192157, 1)
 
+environment/defaults/default_clear_color=Color(0.0431373, 0.0784314, 0.192157, 1)

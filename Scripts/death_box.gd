@@ -8,4 +8,4 @@ signal death
 
 func _on_area_entered(_area: Area2D) -> void:
 	#print("death box entered")
-	death.emit() 
+	Global.player.death()

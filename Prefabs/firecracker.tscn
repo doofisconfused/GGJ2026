@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbih2bcqhjnio"]
+
+[ext_resource type="Script" uid="uid://dkhmhqh657ik8" path="res://Scripts/firecracker.gd" id="1_lvib0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvib0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1wi6"]
+
+[node name="Firecracker" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 33
+contact_monitor = true
+max_contacts_reported = 3
+script = ExtResource("1_lvib0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lvib0")
+debug_color = Color(0.792883, 0.426797, 0, 0.42)
+
+[node name="Explosion" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 35
+
+[node name="ExplosionRange" type="CollisionShape2D" parent="Explosion"]
+scale = Vector2(20, 20)
+shape = SubResource("CircleShape2D_a1wi6")
+debug_color = Color(0.995213, 0, 0.209153, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="Explosion" to="." method="_on_explosion_area_entered"]
