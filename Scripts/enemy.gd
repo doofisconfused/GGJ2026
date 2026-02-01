@@ -20,7 +20,7 @@ var facing_right: bool = true
 var aggression_timer: float = TIME_TO_AGGRO
 # time before enemy leaves suspicon and enters aggression - will decrement if player is not seen
 var peace_timer: float = TIME_TO_COOLDOWN
-# time before enemy leaves aggression - will reset if player is caught
+# time before enemy leaves aggression/suspicion - will reset if player is caught
 
 var enemy_suspicion: String = "normal" # normal, suspicion, aggro
 # normal - enemy does not see the player. 
@@ -29,6 +29,8 @@ var enemy_suspicion: String = "normal" # normal, suspicion, aggro
 
 var player_changed: bool = false
 # true if the player changed masks this frame. used for determining aggro.
+
+var watched_player: CharacterBody2D # permanent reference to the player after found by raycast
 
 func _ready() -> void:
 	set_walk_points()
@@ -57,14 +59,23 @@ func _physics_process(delta: float) -> void:
 		if scanned_player.mask_index == 0:
 			enemy_suspicion = "aggro"
 			peace_timer = TIME_TO_COOLDOWN
-		if scanned_player.mask_index == 2:
-			if enemy_suspicion != "aggro": enemy_suspicion = "suspicious"
-			print("a monkey!")
-		if player_changed:
+		elif player_changed:
 			enemy_suspicion = "aggro"
-	else: aggression_timer = TIME_TO_AGGRO
+			peace_timer = TIME_TO_COOLDOWN
+		elif scanned_player.mask_index == 2:
+			if enemy_suspicion != "aggro": 
+				enemy_suspicion = "suspicious"
+				peace_timer = TIME_TO_COOLDOWN
+				aggression_timer -= delta
+		else: peace_timer -= delta
+		watched_player = scanned_player
+	else: peace_timer -= delta
+					
 		
 	if enemy_suspicion == "normal":
+		peace_timer = TIME_TO_COOLDOWN
+		aggression_timer = TIME_TO_AGGRO
+		watching_eye.modulate = Color.WHITE
 		if origin.x < destination.x:
 			if global_position.x >= destination.x:
 				facing_right = false
@@ -77,21 +88,23 @@ func _physics_process(delta: float) -> void:
 			if global_position.x >= origin.x:
 				facing_right = false
 		watching_eye.modulate = Color.WHITE
+		velocity.x = SPEED * (1 if facing_right else -1)
+
 				
 	if enemy_suspicion == "aggro":
+		aggression_timer = TIME_TO_AGGRO
 		peace_timer -= delta
 		watching_eye.modulate = Color.WHITE.lerp(Color.RED, peace_timer / TIME_TO_COOLDOWN)
 		if peace_timer <= 0: enemy_suspicion = "normal"
-		
-		
-		
+		velocity.x = SPEED * (1 if facing_right else -1)
+
 	if enemy_suspicion == "suspicious":
-		aggression_timer -= delta
-		print(aggression_timer)
-		watching_eye.modulate = Color.YELLOW.lerp(Color.WHITE, aggression_timer / TIME_TO_AGGRO)
-		if aggression_timer <= 0: 
-			enemy_suspicion = "aggro"
-			
+		print(peace_timer)
+		watching_eye.modulate = Color.RED.lerp(Color.YELLOW, aggression_timer / TIME_TO_AGGRO)
+		facing_right = watched_player.global_position.x > global_position.x
+		velocity.x = 0 
+		if aggression_timer <= 0: enemy_suspicion = "aggro"
+		if peace_timer <= 0: enemy_suspicion = "normal"
 		if origin.x < destination.x:
 			if global_position.x >= destination.x:
 				facing_right = false
@@ -107,7 +120,6 @@ func _physics_process(delta: float) -> void:
 	# sorry there's probably a more eloquent way to do this. if it doesn't work
 	# or you want it done differently i'll change it
 	
-	velocity.x = SPEED * (1 if facing_right else -1)
 	player_changed = false
 	move_and_slide()
 
